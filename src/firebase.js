@@ -1,13 +1,6 @@
 import { initializeApp } from "firebase/app";
-​​import {signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut} from "firebase/auth";
-​​import {
-​​  getFirestore,
-​​  query,
-​​  getDocs,
-​​  collection,
-​​  where,
-​​  addDoc,
-​​} from "firebase/firestore";
+import { getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut } from "firebase/auth";
+import {getFirestore,collection,addDoc} from "firebase/firestore";
 const firebaseConfig = {
     apiKey: "AIzaSyDfNbeamfIr0xnZ0RP4A2Uw3ozAuZGWxzo",
     authDomain: "fir-auth-16913.firebaseapp.com",
@@ -19,11 +12,11 @@ const firebaseConfig = {
   };
 
 
-const app = ​​initializeApp(firebaseConfig);
-​​const auth = getAuth(app);
-​​const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const googleProvider = new GoogleAuthProvider();
+
 const logInWithEmailAndPassword = async (email, password) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -51,4 +44,11 @@ const logInWithEmailAndPassword = async (email, password) => {
 
   const logout = () => {
     signOut(auth);
+  };
+
+  export {
+    auth,
+    db,
+    signInWithEmailAndPassword,
+    logout,
   };
